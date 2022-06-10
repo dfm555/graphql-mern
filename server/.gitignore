@@ -14,11 +14,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-server/.env
+../.env
 .env*.local
 
 
 #webstom
 .idea
-.graphqlconfig
-schema.graphql

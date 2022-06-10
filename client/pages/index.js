@@ -1,50 +1,48 @@
+import NextLink from 'next/link'
 import { gql } from '@apollo/client'
-import { Container, Card, Grid, Row, Text } from '@nextui-org/react'
+import { Box, Grid, GridItem, Heading, Link } from '@chakra-ui/react'
+
+import ClientsTable from 'components/clientsTable'
 
 import client from '../apollo-client'
 
-const list = [
-  {
-    title: 'Orange',
-    img: '/images/fruit-1.jpeg',
-    price: '$5.50'
-  },
-  {
-    title: 'Tangerine',
-    img: '/images/fruit-2.jpeg',
-    price: '$3.00'
-  },
-  {
-    title: 'Raspberry',
-    img: '/images/fruit-3.jpeg',
-    price: '$10.00'
-  },
-  {
-    title: 'Lemon',
-    img: '/images/fruit-4.jpeg',
-    price: '$5.30'
-  },
-  {
-    title: 'Advocato',
-    img: '/images/fruit-5.jpeg',
-    price: '$15.70'
-  },
-  {
-    title: 'Lemon 2',
-    img: '/images/fruit-6.jpeg',
-    price: '$8.00'
-  },
-  {
-    title: 'Banana',
-    img: '/images/fruit-7.jpeg',
-    price: '$7.50'
-  },
-  {
-    title: 'Watermelon',
-    img: '/images/fruit-8.jpeg',
-    price: '$12.20'
-  }
-]
+const Home = ({ data }) => (
+  <Grid
+    templateAreas={`"header"
+                  "main"
+                  "footer"`}
+    gridTemplateRows={'50px 1fr 30px'}
+    gridTemplateColumns={'1fr'}
+    gap="0 0"
+    h={'100vh'}
+  >
+    <GridItem pl="2" pr="2" bg="black" area={'header'}>
+      <Box maxW={'7xl'} m={'0 auto'}>
+        <Heading as={'h1'} color="white">
+          Projects
+        </Heading>
+      </Box>
+    </GridItem>
+    <GridItem pl="2" pr="2" area={'main'} gridColumnEnd={'none'}>
+      <Box maxW={'7xl'} m={'0 auto'}>
+        <ClientsTable clients={data} />
+      </Box>
+    </GridItem>
+    <GridItem
+      display={'flex'}
+      pl="2"
+      bg="gray.300"
+      area={'footer'}
+      justifyContent={'center'}
+    >
+      <NextLink href="https://github.com/dfm555" passHref>
+        <Link color={'black'} isExternal>
+          &copy; Copyright 2022 dfm55
+        </Link>
+      </NextLink>
+    </GridItem>
+  </Grid>
+)
 
 export async function getServerSideProps() {
   let data = []
@@ -55,6 +53,7 @@ export async function getServerSideProps() {
         query getClients {
           clients {
             id
+            avatar
             name
             email
             phone
@@ -68,8 +67,6 @@ export async function getServerSideProps() {
     error = ApolloError.toString()
   }
 
-  console.log(error)
-
   return {
     props: {
       error,
@@ -78,42 +75,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home({ data, error }) {
-  return error ? (
-    <>{error}</>
-  ) : (
-    <Container lg>
-      <Grid.Container gap={2} justify="flex-start">
-        {list.map((item, index) => (
-          <Grid xs={6} sm={3} key={index}>
-            <Card isPressable>
-              <Card.Body css={{ p: 0 }}>
-                <Card.Image
-                  src={'https://nextui.org' + item.img}
-                  objectFit="cover"
-                  width="100%"
-                  height={140}
-                  alt={item.title}
-                />
-              </Card.Body>
-              <Card.Footer css={{ justifyItems: 'flex-start' }}>
-                <Row wrap="wrap" justify="space-between" align="center">
-                  <Text b>{item.title}</Text>
-                  <Text
-                    css={{
-                      color: '$accents7',
-                      fontWeight: '$semibold',
-                      fontSize: '$sm'
-                    }}
-                  >
-                    {item.price}
-                  </Text>
-                </Row>
-              </Card.Footer>
-            </Card>
-          </Grid>
-        ))}
-      </Grid.Container>
-    </Container>
-  )
-}
+export default Home

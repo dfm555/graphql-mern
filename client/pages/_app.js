@@ -1,12 +1,11 @@
-import { NextUIProvider } from '@nextui-org/react'
-
+import { ChakraProvider } from '@chakra-ui/react'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <NextUIProvider>
+    <ChakraProvider>
       <Component {...pageProps} />
-    </NextUIProvider>
+    </ChakraProvider>
   )
 }
 
