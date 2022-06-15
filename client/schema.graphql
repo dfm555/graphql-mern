@@ -1,0 +1,64 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: RootQueryType
+  mutation: Mutation
+}
+
+type Client {
+  avatar: String
+  email: String
+  id: ID
+  name: String
+  phone: String
+}
+
+type Mutation {
+  addClient(
+    avatar: String
+    email: String!
+    name: String!
+    phone: String!
+  ): Client
+  addProject(
+    clientId: ID!
+    description: String!
+    name: String!
+    status: ProjectStatus = new
+  ): Project
+  deleteClient(id: ID!): Client
+  deleteProject(id: ID!): Project
+  updateProject(
+    description: String
+    id: ID!
+    name: String
+    status: ProjectStatusUpdate
+  ): Project
+}
+
+type Project {
+  client: Client
+  description: String
+  id: ID
+  name: String
+  status: String
+}
+
+type RootQueryType {
+  client(id: ID): Client
+  clients: [Client]
+  project(id: ID): Project
+  projects: [Project]
+}
+
+enum ProjectStatus {
+  completed
+  new
+  progress
+}
+
+enum ProjectStatusUpdate {
+  completed
+  new
+  progress
+}

@@ -20,5 +20,3 @@ server/.env
 
 #webstom
 .idea
-.graphqlconfig
-schema.graphql
