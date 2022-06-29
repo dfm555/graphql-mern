@@ -1,27 +1,15 @@
-const express = require('express')
-const colors = require('colors')
-const cors = require('cors')
-const { graphqlHTTP } = require('express-graphql')
-require('dotenv').config()
-const connectDB = require('./src/config/db')
-const schema = require('./src/schema/schema')
+import colors from 'colors' // eslint-disable-line
+import dotenv from 'dotenv'
 
-const port = process.env.PORT || 3001
-const app = express()
+import app from './app.js'
+import connectDB from './src/config/db.js'
+
+dotenv.config()
 
 /* Connecting to the database. */
-connectDB()
+connectDB().then(() => console.log('Connected to the database.'.green))
 
-app.use(cors())
+const port = process.env.PORT || 3001
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV === 'development'
-  })
-)
-
-app.listen(port, () =>
-  console.log(`Server running on port ${port}`.green.underline)
-)
+app.listen(port)
+console.log(`Server running on port ${port}`.green.underline)

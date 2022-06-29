@@ -1,23 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {
-  Heading,
-  Divider,
-  Avatar,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Button,
-  Stack,
-  Tooltip
-} from '@chakra-ui/react'
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
+import { useQuery } from '@apollo/client'
+import { Heading, Divider, Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react'
+import ClientRow from './ClientRow'
 
-const ClientsTable = ({ clients }) => {
+import { GET_CLIENTS } from 'grahpql/queries/clientQueries'
+
+const ClientsTable = () => {
+  const { data, loading, error } = useQuery(GET_CLIENTS, { notifyOnNetworkStatusChange: true })
+
+  if (error) return <div>{error}</div>
+  if (loading) return <div>Loading</div>
+
   return (
     <>
       <Heading mt={10} size={'lg'}>
@@ -35,51 +27,14 @@ const ClientsTable = ({ clients }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {clients.map(client => (
-              <Tr key={client.id}>
-                <Td>
-                  <Avatar name={client.name} src={client.avatar} />
-                </Td>
-                <Td>{client.name}</Td>
-                <Td>{client.email}</Td>
-                <Td>
-                  <Stack direction="row" spacing={4}>
-                    <Tooltip hasArrow label="Edit Client" placement="top">
-                      <Button
-                        borderRadius={'none'}
-                        colorScheme="gray"
-                        size={'sm'}
-                      >
-                        <EditIcon />
-                      </Button>
-                    </Tooltip>
-                    <Tooltip
-                      hasArrow
-                      label="Delete Client"
-                      background={'red.400'}
-                      placement="top"
-                    >
-                      <Button
-                        borderRadius={'none'}
-                        colorScheme="red"
-                        size={'sm'}
-                      >
-                        <DeleteIcon />
-                      </Button>
-                    </Tooltip>
-                  </Stack>
-                </Td>
-              </Tr>
+            {data?.clients?.map(client => (
+              <ClientRow key={client.id} client={client} />
             ))}
           </Tbody>
         </Table>
       </TableContainer>
     </>
   )
-}
-
-ClientsTable.propTypes = {
-  clients: PropTypes.array.isRequired
 }
 
 export default ClientsTable

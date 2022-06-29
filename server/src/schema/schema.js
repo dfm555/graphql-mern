@@ -1,4 +1,4 @@
-const {
+import {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
@@ -6,11 +6,11 @@ const {
   GraphQLList,
   GraphQLNonNull,
   GraphQLEnumType
-} = require('graphql')
+} from 'graphql'
 
 /* Importing the models from the mongoose database. */
-const Project = require('../models/Project')
-const Client = require('../models/Client')
+import Project from '../models/Project.js'
+import Client from '../models/Client.js'
 
 const ProjectType = new GraphQLObjectType({
   name: 'Project',
@@ -112,6 +112,7 @@ const mutation = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
+        console.log('delete', args)
         return Client.findByIdAndRemove(args.id)
       }
     },
@@ -201,7 +202,4 @@ const mutation = new GraphQLObjectType({
   }
 })
 
-module.exports = new GraphQLSchema({
-  query: RootQuery,
-  mutation
-})
+export default new GraphQLSchema({ query: RootQuery, mutation })

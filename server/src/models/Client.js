@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const ClientSchema = new mongoose.Schema({
   avatar: {
@@ -15,4 +15,4 @@ const ClientSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Client', ClientSchema)
+export default mongoose.model('Client', ClientSchema)
