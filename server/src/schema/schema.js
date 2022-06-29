@@ -112,7 +112,6 @@ const mutation = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        console.log('delete', args)
         return Client.findByIdAndRemove(args.id)
       }
     },
