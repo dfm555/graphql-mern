@@ -13,13 +13,13 @@ const Home = () => {
       templateAreas={`"header"
                   "main"
                   "footer"`}
-      gridTemplateRows={'50px 1fr 30px'}
+      gridTemplateRows={'auto 1fr auto'}
       gridTemplateColumns={'1fr'}
       gap='0 0'
       h={'100vh'}
     >
       <GridItem pl='2' pr='2' bg='black' area={'header'}>
-        <Box maxW={'7xl'} m={'0 auto'}>
+        <Box maxW={'7xl'} m={'0 auto'} pt='5' pb='5'>
           <Heading as={'h1'} color='white'>
             Projects
           </Heading>
@@ -30,7 +30,7 @@ const Home = () => {
           <ClientsTable />
         </Box>
       </GridItem>
-      <GridItem display={'flex'} pl='2' bg='gray.300' area={'footer'} justifyContent={'center'}>
+      <GridItem display={'flex'} p={'1'} bg='gray.300' area={'footer'} justifyContent={'center'}>
         <NextLink href='https://github.com/dfm555' passHref>
           <Link color={'black'} isExternal>
             &copy; Copyright 2022 dfm55

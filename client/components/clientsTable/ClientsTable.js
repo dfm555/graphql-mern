@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { Heading, Divider, Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react'
+import { Heading, Divider, Box, Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react'
+
+import AddClientsModal from 'components/addClientsModal/AddClientsModal'
 import ClientRow from './ClientRow'
 
 import { GET_CLIENTS } from 'grahpql/queries/clientQueries'
@@ -16,23 +18,26 @@ const ClientsTable = () => {
         Clients
       </Heading>
       <Divider mt={2} variant={'dashed'} />
-      <TableContainer mt={'5'}>
-        <Table variant={'striped'} colorScheme={'facebook'} size={'sm'}>
-          <Thead>
-            <Tr>
-              <Th />
-              <Th>Name</Th>
-              <Th>Email</Th>
-              <Th>Actions</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {data?.clients?.map(client => (
-              <ClientRow key={client.id} client={client} />
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <Box mt={10}>
+        <AddClientsModal />
+        <TableContainer borderWidth='1px' borderRadius='lg' mt={'5'}>
+          <Table variant={'striped'} colorScheme={'facebook'} size={'sm'}>
+            <Thead h='60px' bg={'blue.700'}>
+              <Tr>
+                <Th />
+                <Th color={'white'}>Name</Th>
+                <Th color={'white'}>Email</Th>
+                <Th color={'white'}>Actions</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {data?.clients?.map(client => (
+                <ClientRow key={client.id} client={client} />
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   )
 }
