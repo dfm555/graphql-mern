@@ -114,7 +114,7 @@ const AddClientsModal = () => {
               <Input
                 name='phone'
                 type={'phone'}
-                placeholder='john.doe@test.com'
+                placeholder='(123) 456-7890'
                 value={phone}
                 onChange={handleChange}
                 required

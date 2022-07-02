@@ -18,7 +18,7 @@ const ClientsTable = () => {
         Clients
       </Heading>
       <Divider mt={2} variant={'dashed'} />
-      <Box mt={10}>
+      <Box mt={10} mb={10}>
         <AddClientsModal />
         <TableContainer borderWidth='1px' borderRadius='lg' mt={'5'}>
           <Table variant={'striped'} colorScheme={'facebook'} size={'sm'}>
