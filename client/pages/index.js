@@ -1,11 +1,14 @@
 import NextLink from 'next/link'
-import { Box, Grid, GridItem, Heading, Link } from '@chakra-ui/react'
+import Image from 'next/image'
 
+import { Box, Grid, GridItem, Heading, Link, Text } from '@chakra-ui/react'
+
+import { initializeApollo, addApolloState } from 'lib/apolloClient'
 import { GET_CLIENTS } from 'grahpql/queries/clientQueries'
 
 import ClientsTable from 'components/clientsTable'
-
-import { initializeApollo, addApolloState } from 'lib/apolloClient'
+import Projects from 'components/projects'
+import AddClientsModal from '../components/addClientsModal/AddClientsModal'
 
 const Home = () => {
   return (
@@ -20,13 +23,16 @@ const Home = () => {
     >
       <GridItem pl='2' pr='2' bg='black' area={'header'}>
         <Box maxW={'7xl'} m={'0 auto'} pt='5' pb='5'>
-          <Heading as={'h1'} color='white'>
-            Projects
+          <Heading as={'h1'} color='white' display={'flex'} alignItems={'center'}>
+            <Image src='/GraphQL_Logo.svg' layout={'fixed'} height={50} width={50} alt='GraphQL Logo' />
+            <Text ml={'10px'}>Projects</Text>
           </Heading>
         </Box>
       </GridItem>
       <GridItem pl='2' pr='2' area={'main'} gridColumnEnd={'none'}>
         <Box maxW={'7xl'} m={'0 auto'}>
+          <AddClientsModal />
+          <Projects />
           <ClientsTable />
         </Box>
       </GridItem>

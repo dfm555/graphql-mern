@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { Heading, Divider, Box, Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react'
+import { Box, Table, Thead, Tbody, Tr, Th, TableContainer } from '@chakra-ui/react'
 
-import AddClientsModal from 'components/addClientsModal/AddClientsModal'
 import ClientRow from './ClientRow'
 
 import { GET_CLIENTS } from 'grahpql/queries/clientQueries'
@@ -14,12 +13,7 @@ const ClientsTable = () => {
 
   return (
     <>
-      <Heading mt={10} size={'lg'}>
-        Clients
-      </Heading>
-      <Divider mt={2} variant={'dashed'} />
       <Box mt={10} mb={10}>
-        <AddClientsModal />
         <TableContainer borderWidth='1px' borderRadius='lg' mt={'5'}>
           <Table variant={'striped'} colorScheme={'facebook'} size={'sm'}>
             <Thead h='60px' bg={'blue.700'}>

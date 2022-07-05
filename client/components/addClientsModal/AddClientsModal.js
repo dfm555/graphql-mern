@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -72,11 +73,11 @@ const AddClientsModal = () => {
     } else {
       initialRef.current.focus()
     }
-  }, [name, email, phone, onClose])
+  }, [name, email, phone, addClient])
 
   return (
-    <div>
-      <Button leftIcon={<AddIcon />} onClick={onOpen} colorScheme={'facebook'}>
+    <Box mt={10}>
+      <Button borderRadius={'none'} leftIcon={<AddIcon />} onClick={onOpen} colorScheme={'facebook'}>
         Add Client
       </Button>
 
@@ -130,7 +131,7 @@ const AddClientsModal = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </div>
+    </Box>
   )
 }
 
