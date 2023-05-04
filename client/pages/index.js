@@ -39,7 +39,7 @@ const Home = () => {
       <GridItem display={'flex'} p={'1'} bg='gray.300' area={'footer'} justifyContent={'center'}>
         <NextLink href='https://github.com/dfm555' passHref>
           <Link color={'black'} isExternal>
-            &copy; Copyright 2022 dfm55
+            &copy; Copyright 2023 dfm555
           </Link>
         </NextLink>
       </GridItem>
